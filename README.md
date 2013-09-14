@@ -1,7 +1,7 @@
 django-bootstrap-admin
 ======================
 
-Twitter Bootstrap Style Admin with some othe niceties for the Django Framework.
+Twitter Bootstrap Style Admin for the Django Admin. 
 
 To install run
     
