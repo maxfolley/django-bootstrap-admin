@@ -1,0 +1,6 @@
+{% load admin_list %}
+{% load admin_extras %}
+{% load i18n %}
+{% if pagination_required %}
+  {% bootstrap_page_number cl page_range %}
+{% endif %}

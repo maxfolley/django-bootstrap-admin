@@ -1,0 +1,84 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static admin_list %}
+{% load url from future %}
+{% load admin_urls %}
+
+{% block extrastyle %}
+  {% if cl.formset or action_form %}
+    {% url 'admin:jsi18n' as jsi18nurl %}
+    <script type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>
+  {% endif %}
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+{{ media.js }}
+{% if action_form %}{% if actions_on_top or actions_on_bottom %}
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function($) {
+        $("tr input.action-select").actions();
+    });
+})(django.jQuery);
+</script>
+{% endif %}{% endif %}
+{% endblock %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ app_label|capfirst|escape }}</a>
+&rsaquo; {{ cl.opts.verbose_name_plural|capfirst }}
+
+
+</div>
+{% endblock %}
+{% endif %}
+
+
+{% block messages %}
+  {% if cl.model_admin.sortable and cl.result_count > 1 %}
+    <div class="alert alert-info">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <i class="icon-info-sign"></i> Drag and drop items in the list to set their order
+    </div>
+  {% endif %}
+  {{ block.super }}
+{% endblock %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+
+<form id="changelist-form" action="" class="{% if cl.model_admin.sortable and cl.result_count > 1 %}sortable{% endif %}" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %}>
+  {% csrf_token %}
+
+  {% if cl.result_count == 0 %}
+    <div class="alert">No {{ cl.opts.verbose_name_plural|lower }} found.</div>
+  {% endif %}
+
+  {% if action_form and cl.full_result_count %}{% admin_actions %}{% endif %}
+
+  {% if has_add_permission %}
+    <a href="{% url cl.opts|admin_urlname:'add' %}{% if is_popup %}?_popup=1{% endif %}" class="btn btn-success">
+      <i class="icon-plus"></i> 
+      {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+    </a>
+  {% endif %}
+
+  {% if cl.formset %}
+    <div>{{ cl.formset.management_form }}</div>
+  {% endif %}
+
+  {% block result_list %}
+    {% result_list cl %}
+  {% endblock %}
+
+  {% block pagination %}{% pagination cl %}{% endblock %}
+
+</form>
+
+{% endblock %}

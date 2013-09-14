@@ -1,0 +1,79 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block content %}
+
+<div id="content-main" class="pull-left">
+{% if app_list %}
+    {% for app in app_list %}
+        <div class="module">
+          <h4><a href="{{ app.app_url }}">{% blocktrans with name=app.name %}{{ name }}{% endblocktrans %}</a></h4>
+        <table class="table table-bordered table-hover" summary="{% blocktrans with name=app.name %}Models available in the {{ name }} application.{% endblocktrans %}">
+        {% for model in app.models %}
+            <tr>
+            {% if model.admin_url %}
+                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+            {% else %}
+                <th scope="row">{{ model.name }}</th>
+            {% endif %}
+
+            {% if model.add_url %}
+            <td><i class="icon-plus-sign"></i>&nbsp;<a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+
+            {% if model.admin_url %}
+            <td><i class="icon-edit"></i>&nbsp;<a href="{{ model.admin_url }}" class="changelink">{% trans 'Edit' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>{% trans "You don't have permission to edit anything." %}</p>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related" class="pull-right">
+    <div class="module" id="recent-actions-module">
+      <h4>{% trans 'Recent Actions' %}</h4>
+            {% load log %}
+            {% get_admin_log 10 as admin_log for_user user %}
+            {% if not admin_log %}
+            <p>{% trans 'None available' %}</p>
+            {% else %}
+            <table class="table table-bordered">
+            {% for entry in admin_log %}
+            <tr class="{% if entry.is_addition %}success{% endif %}{% if entry.is_change %}warning{% endif %}{% if entry.is_deletion %}error{% endif %}" >
+              <td>
+                <i class="{% if entry.is_addition %}icon-ok-circle{% endif %}{% if entry.is_change %}icon-edit{% endif %}{% if entry.is_deletion %}icon-remove-circle{% endif %}"></i> 
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                    {{ entry.object_repr }}
+                {% else %}
+                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+              </td>
+              <td>
+                {% if entry.content_type %}
+                    <span class="mini quiet">{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</span>
+                {% else %}
+                    <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+            </table>
+            {% endif %}
+    </div>
+</div>
+{% endblock %}

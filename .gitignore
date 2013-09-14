@@ -1,5 +1,8 @@
 *.log
 *.pot
 *.pyc
+django_bootstrap_admin.egg-info/*
+build/
+dist/
 env/
 local_settings.py
