@@ -50,7 +50,7 @@
   {% endfor %}
   {% endblock %}
 
-  {% if not add %}
+  {% if not add and has_delete_perission %}
     <a class="btn btn-danger pull-left" href="delete/"><i class="icon-trash"></i> Delete</a>
   {% endif %}
 
@@ -58,10 +58,16 @@
   {% prepopulated_fields_js %}
 
   <div class="btn-group pull-right">
-    <button type="submit" class="btn" name="_save"><i class="icon-ok-sign"></i> Save</button>
+    {% if has_edit_permission %}
+      <button type="submit" class="btn" name="_save"><i class="icon-ok-sign"></i> Save</button>
+    {% endif %}
     {% if not is_popup %}
-      <button type="submit" class="btn" name="_addanother"><i class="icon-plus-sign"></i> Save and add another</button>
-      <button type="submit" class="btn" name="_continue"><i class="icon-edit"></i> Save and continue editing</button>
+      {% if has_add_permission %}
+        <button type="submit" class="btn" name="_addanother"><i class="icon-plus-sign"></i> Save and add another</button>
+      {% endif %}
+      {% if has_edit_permission %}
+        <button type="submit" class="btn" name="_continue"><i class="icon-edit"></i> Save and continue editing</button>
+      {% endif %}
     {% endif %}
   </div>
 </form>

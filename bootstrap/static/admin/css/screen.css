@@ -1,3 +1,10 @@
+a {
+  color: #3498db;
+}
+a:hover {
+  color: #2980b9;
+  text-decoration: none;
+}
 .action-checkbox,
 .action-checkbox-column {
   text-align:center !important;
@@ -35,11 +42,29 @@
 .add-row a {
   text-decoration:none;
 }
+.alert-danger,
+.alert-error {
+  background: transparent;
+  border-color: #c0392b;
+  border-width: 2px;
+  color: #c0392b;
+}
 body {
-  background:#F6F6F8 !important;
+  background-color: #F6F6F8 !important;
 }
 .breadcrumbs {
   margin-bottom:10px;
+}
+.btn {
+  background: #1abc9c;
+  border: none;
+  color: #FFF;
+  padding: 8px 22px;
+  text-shadow: none;
+}
+.btn:hover {
+  background-color: #48c9b0;
+  color: #FFF;
 }
 .btn-group {
   padding:1px 0;
@@ -132,6 +157,7 @@ body {
   margin:0;
 }
 #container {
+  background-color: #F6F6F8 !important;
   min-width:960px;
   padding:10px 20px;
 }
@@ -160,9 +186,8 @@ fieldset,
 .inline-group {
   -moz-border-radius:4px;
   -webkit-border-radius:4px;
-  background:#FFF;
-  border:solid 1px #DDD;
-  border-radius:4px;
+  background-color: #F6F6F8;
+  border: none;
 }
 fieldset,
 .inline-group {
@@ -262,8 +287,6 @@ fieldset h2 {
   width:20px;
 }
 #header {
-  background:#000;
-  border-bottom:solid 4px #dcdcdc;
   color:#FFF;
   margin-bottom:10px;
   min-width:960px;
@@ -276,6 +299,7 @@ fieldset h2 {
   margin-top:15px;
 }
 #header > div > p {
+  color: #e74c3c;
   margin-right:5px;
   margin-top:8px;
 }
@@ -302,18 +326,57 @@ fieldset h2 {
 }
 .inline-related fieldset {
 }
+input[type=password]:focus, 
+input[type=text]:focus {
+  border-color: #1abc9c;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-width: 2px;
+}
 input[type=checkbox] {
   float:left;
+}
+input[type=password], 
+input[type=text] {
+  background-color: #FFF;
+  border-color: transparent;
+  border-width: 2px;
+  -webkit-appearance: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  height: 21px;
+  padding: 8px 5px;
+  font-size: 17px;
+  width: 300px;
+}
+input:focus {
+}
+.login {
+  background-color: #1abc9c !important;
+}
+.login #container:before {
+  border-style: solid;
+  border-color: transparent #F6F6F8 transparent transparent;
+  border-width: 12px 12px 12px 0;
+  content: '';
+  left: -12px;
+  position: absolute;
+  top: 30px;
 }
 .login #container {
   -moz-border-radius:4px;
   -webkit-border-radius:4px;
-  border:solid 1px #DDD;
+  background-color: #F6F6F8 !important;
+  border: none !important;
+  position: relative;
   width:300px !important;
 }
 .login .form-row {
   border:none;
   padding:0 !important;
+  margin-bottom: 10px;
 }
 .login .form-row #id_username,
 .login .form-row #id_password {
@@ -335,6 +398,18 @@ input[type=checkbox] {
 }
 .login form {
   margin:0;
+}
+.login #content > header {
+  color: #FFF;
+  left: -200px;
+  position: absolute;
+  top: 13px;
+  width: 170px;
+}
+.login #content > header h1 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 22px;
 }
 .login .alert {
   margin:20px 0 0 0;
@@ -400,7 +475,9 @@ p a {
 [data-wysihtml5-dialog] {
   overflow:hidden;
 }
-  
+#recent-actions-module table {
+  border: 0;
+} 
 .results {
   clear:both;
 }
@@ -499,8 +576,62 @@ p a {
 .sortpriority {
   display:none;
 }
-table {
-  background:#FFF;
+.table-bordered {
+  border: 0;
+}
+.table-bordered tr {
+  background-color: #FFF;
+  border: 0;
+}
+.table-bordered thead tr {
+  background-color: #34495e;
+  color: #FFF;
+}
+.table-bordered thead tr a {
+  color: #FFF;
+}
+.table-bordered tr td {
+  border-left: solid 2px #ecf0f1;
+}
+.table-bordered tr:nth-child(even) {
+  background-color: #ECF0F1;
+}
+.table-bordered tr:nth-child(even) td {
+  border-left: solid 2px #95a5a6;
+}
+.table-bordered tr,
+.table-bordered td,
+.table-bordered th {
+  border-color: #bbc1c5;
+  border-width: 0px;
+}
+.table tbody tr.error td, 
+.table tbody tr.warning td, 
+.table tbody tr.success td {
+  border: 0;
+}
+.table tbody tr.error td a, 
+.table tbody tr.warning td a, 
+.table tbody tr.success td a {
+  text-decoration: underline;
+}
+.table tbody tr.error td {
+  background-color: rgba(230, 76, 60, 0.5);
+}
+.table tbody tr.error td:last-child {
+  border-left: solid 2px rgba(230, 76, 60, 0.1); 
+}
+.table tbody tr.warning td {
+  background-color: rgba(52, 152, 219, 0.5);
+}
+.table tbody tr.warning td:last-child {
+  border-left: solid 2px rgba(52, 152, 219, 0.1); 
+}
+.table tbody tr.success td {
+  background-color: rgba(46, 204, 113, 0.5);
+}
+.table tbody tr.success td:last-child {
+  border-left: solid 2px rgba(46, 204, 113, 0.1); 
 }
 .ui-sortable-helper {
   border-bottom:solid 1px #DDD;

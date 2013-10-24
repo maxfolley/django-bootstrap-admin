@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 from django.contrib.admin.views.main import (PAGE_VAR)
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
@@ -30,3 +31,8 @@ def bootstrap_page_number(cl,page_range):
         else:
             substitutions['numbers'] += u'<li><a href="%s"%s>%d</a>'%(escape(cl.get_query_string({PAGE_VAR: i})), (i == cl.paginator.num_pages-1 and ' class="end"' or ''), i+1)
     return mark_safe(default_template % substitutions)
+
+# settings value
+@register.simple_tag
+def settings_value(name):
+  return getattr(settings, name, "")
