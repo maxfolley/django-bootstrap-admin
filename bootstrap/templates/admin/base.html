@@ -37,7 +37,7 @@
               <li>
                 <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a>
               <li>
-                <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
+                <a href="{% url 'admin:logout' %}?next=/admin">{% trans 'Logout' %}</a>
           {% endblock %}
       </ul>
     </div>

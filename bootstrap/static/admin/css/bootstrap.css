@@ -2118,7 +2118,7 @@ table [class*=span],
 }
 
 .table tbody tr.warning td {
-  background-color: #fcf8e3;
+  /*background-color: #fcf8e3;*/
 }
 
 .table tbody tr.info td {
@@ -2134,7 +2134,7 @@ table [class*=span],
 }
 
 .table-hover tbody tr.warning:hover td {
-  background-color: #faf2cc;
+  /*background-color: #faf2cc;*/
 }
 
 .table-hover tbody tr.info:hover td {

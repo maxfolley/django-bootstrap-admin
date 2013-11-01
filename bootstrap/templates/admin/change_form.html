@@ -33,7 +33,7 @@
   {% if errors %}
     <div class="alert alert-error">
       <button type="button" class="close" data-dismiss="alert">×</button>
-      <h4>Oh snap!</h4>
+      <h4>Whoops!</h4>
       Your form has a couple errors. Please fix them below.
     </div>
   {% endif %}
@@ -50,23 +50,23 @@
   {% endfor %}
   {% endblock %}
 
-  {% if not add and has_delete_perission %}
-    <a class="btn btn-danger pull-left" href="delete/"><i class="icon-trash"></i> Delete</a>
+  {% if not add and has_delete_permission %}
+    <a class="btn btn-danger pull-left" href="delete/"><i class="icon-trash icon-white"></i> Delete</a>
   {% endif %}
 
   {# JavaScript for prepopulated fields #}
   {% prepopulated_fields_js %}
 
   <div class="btn-group pull-right">
-    {% if has_edit_permission %}
-      <button type="submit" class="btn" name="_save"><i class="icon-ok-sign"></i> Save</button>
+    {% if has_change_permission %}
+      <button type="submit" class="btn" name="_save"><i class="icon-ok-sign icon-white"></i> Save</button>
     {% endif %}
     {% if not is_popup %}
       {% if has_add_permission %}
-        <button type="submit" class="btn" name="_addanother"><i class="icon-plus-sign"></i> Save and add another</button>
+        <button type="submit" class="btn" name="_addanother"><i class="icon-plus-sign icon-white"></i> Save and add another</button>
       {% endif %}
       {% if has_edit_permission %}
-        <button type="submit" class="btn" name="_continue"><i class="icon-edit"></i> Save and continue editing</button>
+        <button type="submit" class="btn" name="_continue"><i class="icon-edit icon-white"></i> Save and continue editing</button>
       {% endif %}
     {% endif %}
   </div>

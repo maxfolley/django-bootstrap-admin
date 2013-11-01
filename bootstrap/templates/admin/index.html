@@ -12,7 +12,7 @@
     {% for app in app_list %}
         <div class="module">
           <h4><a href="{{ app.app_url }}">{% blocktrans with name=app.name %}{{ name }}{% endblocktrans %}</a></h4>
-        <table class="table table-bordered table-hover" summary="{% blocktrans with name=app.name %}Models available in the {{ name }} application.{% endblocktrans %}">
+        <table class="table table-striped table-hover" summary="{% blocktrans with name=app.name %}Models available in the {{ name }} application.{% endblocktrans %}">
         {% for model in app.models %}
             <tr>
             {% if model.admin_url %}
@@ -52,11 +52,11 @@
             {% if not admin_log %}
             <p>{% trans 'None available' %}</p>
             {% else %}
-            <table class="table table-bordered">
+            <table class="table table-striped">
             {% for entry in admin_log %}
             <tr class="{% if entry.is_addition %}success{% endif %}{% if entry.is_change %}warning{% endif %}{% if entry.is_deletion %}error{% endif %}" >
               <td>
-                <i class="{% if entry.is_addition %}icon-ok-circle{% endif %}{% if entry.is_change %}icon-edit{% endif %}{% if entry.is_deletion %}icon-remove-circle{% endif %}"></i> 
+                <i class="icon-white {% if entry.is_addition %}icon-ok-circle{% endif %}{% if entry.is_change %}icon-edit{% endif %}{% if entry.is_deletion %}icon-remove-circle{% endif %}"></i> 
                 {% if entry.is_deletion or not entry.get_admin_url %}
                     {{ entry.object_repr }}
                 {% else %}

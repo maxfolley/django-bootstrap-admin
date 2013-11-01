@@ -1,7 +1,8 @@
 django-bootstrap-admin
 ======================
+Bootstrap Themed Django Admin. 
 
-Twitter Bootstrap Style Admin for the Django Admin. 
+*THIS PROJECT IS UNDER ACTIVE DEVELOPMENT*
 
 To install run
     
